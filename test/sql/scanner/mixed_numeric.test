@@ -21,3 +21,11 @@ select * from sqlite_scan('data/db/mixed_data_numeric.db', 'tbl');
 42
 hello
 NULL
+
+statement ok
+SET sqlite_all_varchar=false
+
+statement error
+select * from sqlite_scan('data/db/mixed_data_numeric.db', 'tbl');
+----
+Invalid type in column
