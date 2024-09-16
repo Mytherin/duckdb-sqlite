@@ -19,3 +19,25 @@ CREATE OR REPLACE TABLE s1.test(j INTEGER);
 statement ok
 SELECT j FROM s1.test
 
+# create or replace view
+statement ok
+CREATE OR REPLACE VIEW s1.test_view AS SELECT 42
+
+statement ok
+CREATE OR REPLACE VIEW s1.test_view AS SELECT 84
+
+query I
+SELECT * FROM s1.test_view
+----
+84
+
+statement ok
+DROP VIEW IF EXISTS s1.test_view
+
+statement ok
+DROP VIEW IF EXISTS s1.test_view
+
+statement error
+SELECT * FROM s1.test_view
+----
+test_view does not exist
